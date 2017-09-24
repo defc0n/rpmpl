@@ -1,0 +1,12 @@
+perl_version:  5.26.1
+base_dir:      /opt/my-project/
+name:          my-project-perl
+version:       1.0
+release:       1
+summary:       My Project Perl Libraries
+description:   Perl library dependencies for My Project.
+license:       GPL+ or Artistic
+group:         Development/Libraries
+url:           https://github.com/my-project
+
+rpmbuild_root: ~/rpmbuild

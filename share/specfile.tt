@@ -1,0 +1,56 @@
+%define perl_version [% perl_version %]
+%define prefix       [% base_dir %]
+%define perl_path    %{prefix}perl/
+%define perl         %{perl_path}bin/perl
+
+%define debug_package %{nil}
+
+Name:           [% name %]
+Summary:        [% summary %]
+Version:        [% version %]
+Release:        [% release %]%{?dist}
+License:        [% license %]
+Group:          [% group %]
+URL:            [% url %]
+Source0:        perl-%{perl_version}.tar.gz
+Source1:        cpanfile
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+AutoReqProv:    0
+BuildRequires:  gcc
+BuildRequires:  perl(App::cpanminus)
+
+%description
+[% description %]
+
+%prep
+%setup -q -n perl-%{perl_version}
+
+%build
+cp %{SOURCE1} .
+/bin/sh Configure -des -Dprefix=%{perl_path} \
+                       -Dman1dir=none \
+                       -Dman3dir=none \
+                       -Duserelocatableinc \
+make
+
+%install
+make install DESTDIR=$RPM_BUILD_ROOT
+
+# Install all application libraries into our built Perl.
+%{buildroot}%{perl} /usr/bin/cpanm --notest --no-man-pages --installdeps .
+
+# Strip the RPM build dir path inside all installed files recursively.
+find %{buildroot}%{perl_path} -type f -print0 | \
+    xargs -0 sed -i 's,%{buildroot}%{perl_path},%{perl_path},g'
+
+# Generate a list of all files in MANIFEST to use in the %files section.
+echo "%%defattr(-, root, root)" > /tmp/%{name}.MANIFEST
+(cd $RPM_BUILD_ROOT; find . -type f -or -type l | sed -e s/^.// -e /^$/d) \
+    >> /tmp/%{name}.MANIFEST
+
+%{_fixperms} $RPM_BUILD_ROOT/*
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files -f /tmp/%{name}.MANIFEST
