@@ -17,7 +17,7 @@ Source1:        cpanfile
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv:    0
 BuildRequires:  gcc
-BuildRequires:  perl(App::cpanminus)
+BuildRequires:  curl
 
 %description
 [% description %]
@@ -30,14 +30,16 @@ cp %{SOURCE1} .
 /bin/sh Configure -des -Dprefix=%{perl_path} \
                        -Dman1dir=none \
                        -Dman3dir=none \
-                       -Duserelocatableinc \
+                       -Duserelocatableinc
 make
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 
 # Install all application libraries into our built Perl.
-%{buildroot}%{perl} /usr/bin/cpanm --notest --no-man-pages --installdeps .
+curl -L https://cpanmin.us | %{buildroot}%{perl} - App::cpanminus
+%{buildroot}%{perl} %{buildroot}%{perl_path}bin/cpanm \
+    --notest --no-man-pages --installdeps .
 
 # Strip the RPM build dir path inside all installed files recursively.
 find %{buildroot}%{perl_path} -type f -print0 | \
