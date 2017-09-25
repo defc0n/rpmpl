@@ -8,5 +8,3 @@ description:   Perl library dependencies for My Project.
 license:       GPL+ or Artistic
 group:         Development/Libraries
 url:           https://github.com/my-project
-
-rpmbuild_root: ~/rpmbuild

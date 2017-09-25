@@ -35,10 +35,21 @@ GetOptions(
 usage()   if $help;
 version() if $version;
 
-$config_file = eval_path( $config_file );
-$cpanfile    = eval_path( $cpanfile );
+$config_file = glob $config_file;
+$cpanfile    = glob $cpanfile;
 
-my $term = Term::ReadLine->new( 'rpmpl' );
+my $rpmbuild_root = "$ENV{HOME}/rpmbuild";
+my $term          = Term::ReadLine->new( 'rpmpl' );
+
+unless ( -e $rpmbuild_root ) {
+    my $init_rpmbuild = $term->ask_yn(
+	prompt  => "rpmbuild root $rpmbuild_root not found. Create it?",
+	default => 'n',
+    );
+
+    die "rpmbuild environment must exist!" unless $init_rpmbuild;
+    init();
+}
 
 unless ( -e $config_file ) {
     my $create_config = $term->ask_yn(
@@ -58,17 +69,6 @@ unless ( -e $config_file ) {
 my $config        = YAML::Tiny->read( $config_file );
 my $perl_version  = $config->[0]->{perl_version};
 my $name          = $config->[0]->{name};
-my $rpmbuild_root = eval_path( $config->[0]->{rpmbuild_root} );
-
-unless ( -e $rpmbuild_root ) {
-    my $init_rpmbuild = $term->ask_yn(
-	prompt  => "rpmbuild root $rpmbuild_root not found. Create it?",
-	default => 'n',
-    );
-
-    die "rpmbuild environment must exist!" unless $init_rpmbuild;
-    init();
-}
 
 init() and exit 0 if $init;
 my $tt = Template->new({ INCLUDE_PATH => dist_share( 'App-rpmpl' ) });
@@ -136,8 +136,4 @@ sub make_dir {
     for ( @_ ) {
 	mkdir $_ unless -d $_;
     }
-}
-
-sub eval_path {
-    Cwd::abs_path( glob $_[0] || $_[0] );
 }
