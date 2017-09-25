@@ -10,3 +10,6 @@ requires 'Template';
 requires 'Term::ReadLine';
 requires 'Term::UI';
 requires 'YAML::Tiny';
+
+configure_requires 'ExtUtils::MakeMaker::CPANfile';
+configure_requires 'File::ShareDir::Install';

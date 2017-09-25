@@ -1,0 +1,54 @@
+{
+   "abstract" : "Create application Perl RPM (with dependencies)",
+   "author" : [
+      "Mitch McCracken"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "ExtUtils::MakeMaker version 6.68, CPAN::Meta::Converter version 2.150001",
+   "license" : [
+      "unknown"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "App-rpmpl",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker::CPANfile" : "0.08",
+            "File::ShareDir::Install" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Cwd" : "0",
+            "File::Basename" : "0",
+            "File::Copy" : "0",
+            "File::Path" : "0",
+            "File::ShareDir::Dist" : "0",
+            "File::Which" : "0",
+            "Getopt::Long" : "0",
+            "LWP::Simple" : "0",
+            "Template" : "0",
+            "Term::ReadLine" : "0",
+            "Term::UI" : "0",
+            "YAML::Tiny" : "0",
+            "perl" : "5.011"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "version" : "0.1"
+}

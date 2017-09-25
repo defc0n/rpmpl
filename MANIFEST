@@ -1,0 +1,10 @@
+cpanfile
+cpanfile.snapshot
+lib/App/rpmpl.pm
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
+README.md
+script/rpmpl
+share/rpmpl.yml
+share/specfile.tt

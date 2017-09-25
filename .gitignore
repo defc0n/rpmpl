@@ -1,4 +1,9 @@
 *#
 *~
+*.bak
+*.gz
+blib/
 etc/
 local/
+Makefile
+pm_to_blib
