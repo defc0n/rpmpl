@@ -1,3 +1,4 @@
+requires 'strictures';
 requires 'Cwd';
 requires 'File::Basename';
 requires 'File::Copy';

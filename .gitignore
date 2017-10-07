@@ -3,6 +3,7 @@
 *.bak
 *.gz
 blib/
+cpanfile.snapshot
 etc/
 local/
 Makefile
