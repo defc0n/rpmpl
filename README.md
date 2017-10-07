@@ -29,8 +29,11 @@ url:           https://github.com/my-project
 ...
 Wrote: /home/user/rpmbuild/SRPMS/my-project-perl-1.0-1.el7.centos.src.rpm
 Wrote: /home/user/rpmbuild/RPMS/x86_64/my-project-perl-1.0-1.el7.centos.x86_64.rpm
-[user@host: ~/my-project ]$ sudo yum -y install /home/user/rpmbuild/RPMS/x86_64/my-project-perl-1.0-1.el7.centos.x86_64.rpm
-[user@host: ~/my-project ]$ /opt/my-project/perl/bin/perl -e 'use Mojolicious; print $Mojolicious::VERSION'
+[user@host: ~/my-project ]$ sudo yum -y install \
+    /home/user/rpmbuild/RPMS/x86_64/my-project-perl-1.0-1.el7.centos.x86_64.rpm
+[user@host: ~/my-project ]$ /opt/my-project/perl/bin/perl \
+    -e 'use Mojolicious; print $Mojolicious::VERSION'
+7.46
 ```
 
 # DESCRIPTION
@@ -59,5 +62,7 @@ Mitch McCracken
 # SEE ALSO
 
 [carton](https://github.com/perl-carton/carton)
+
 [cpanm](https://github.com/miyagawa/cpanminus)
+
 [plenv](https://github.com/tokuhirom/plenv)
