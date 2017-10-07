@@ -14,3 +14,8 @@ requires 'YAML::Tiny';
 
 configure_requires 'ExtUtils::MakeMaker::CPANfile';
 configure_requires 'File::ShareDir::Install';
+
+test_requires 'Cwd';
+test_requires 'File::Spec';
+test_requires 'File::Temp';
+test_requires 'Test2::V0';

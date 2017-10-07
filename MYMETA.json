@@ -45,7 +45,8 @@
             "Term::ReadLine" : "0",
             "Term::UI" : "0",
             "YAML::Tiny" : "0",
-            "perl" : "5.011"
+            "perl" : "5.011",
+            "strictures" : "0"
          }
       }
    },

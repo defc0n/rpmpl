@@ -32,4 +32,5 @@ requires:
   Term::UI: '0'
   YAML::Tiny: '0'
   perl: '5.011'
+  strictures: '0'
 version: '0.1'
